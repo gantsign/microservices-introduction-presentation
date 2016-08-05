@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/gantsign/microservices-introduction-presentation/issues"
   },
-  "homepage": "https://github.com/gantsign/microservices-introduction-presentation#readme"
+  "homepage": "https://github.com/gantsign/microservices-introduction-presentation#readme",
+  "engines": {
+    "node": "^6.3.1"
+  }
 }
