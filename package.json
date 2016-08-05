@@ -18,5 +18,8 @@
   "homepage": "https://github.com/gantsign/microservices-introduction-presentation#readme",
   "engines": {
     "node": "^6.3.1"
+  },
+  "dependencies": {
+    "reveal.js": "~3.3.0"
   }
 }
