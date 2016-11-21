@@ -17,12 +17,14 @@ LICENSE text
 *.ts text
 *.yml text
 *.yaml text
+*.svg text
 
 # Denote all files that are truly binary and should not be modified.
 *.png binary
 *.jpg binary
 *.jpeg binary
 *.gif binary
+*.svgz binary
 *.eot binary
 *.tff binary
 *.woff binary

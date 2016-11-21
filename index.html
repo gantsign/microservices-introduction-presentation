@@ -35,13 +35,26 @@
 
           <div id="author">John Freeman</div>
           <div id="company">GantSign Ltd.</div>
-          <div id="date">9 Aug 2016</div>
+          <div id="date">21 Nov 2016</div>
 
           <div id="license">
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence" style="border-width:0" data-src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />
             This work is licensed under a
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
           </div>
+
+          <aside class="notes">
+            <p>Welcome</p>
+            <p>
+              There are aany presentations covering the low level details of
+              implementing microservices: e.g. Docker, Spring-Boot, Vert.x &amp;
+              Akka
+            </p>
+            <p>
+              This presentation is going to step back, look at the benefits,
+              risks, patterns and organizational impacts of microservices
+            </p>
+          </aside>
         </section>
 
         <section>
@@ -50,8 +63,8 @@
 
             <aside class="notes">
               <p>
-                No standard definition but I'm going to put forawrd
-                some common features of a microservice.
+                No standard definition but I'm going to put forward some common
+                features of a microservice.
               </p>
             </aside>
           </section>
@@ -94,9 +107,12 @@
 
             <aside class="notes">
               <p>
-                Microservices should be
-                developed independently with the external API being the interface
-                between teams.
+                A microservice project consists of multiple teams working in
+                parallel.
+              </p>
+              <p>
+                Microservices should be developed independently, with the
+                external API being the interface between teams.
               </p>
             </aside>
           </section>
@@ -105,10 +121,17 @@
             <h1>Opinionated SOA</h1>
 
             <aside class="notes">
-              <ul>
-                <li>Drop the enterprise container</li>
-                <li>Hosted separatly</li>
-                <li>Leveraging cloud infrastructure</li>
+              <p>
+                Microservices are an opinionated form of Service Oriented
+                Architecture.
+              </p>
+              <p>
+                Commonly this includes:
+                <ul>
+                  <li>Dropping the enterprise container</li>
+                  <li>Hosting each service separately</li>
+                  <li>Leveraging cloud infrastructure</li>
+                </ul>
               </p>
             </aside>
           </section>
@@ -118,8 +141,32 @@
 
             <aside class="notes">
               <p>
-                SOA popularity has fallen 75% since 2006; I suspect most people found
-                the extra effort didn't deliver sufficient benefits.
+                This is a graph of Google searches for SOA and microservices
+                since 2004.
+              </p>
+              <p>
+                Popularity for SOA peeked in 2006, since then it's fallen by
+                about 75%.
+              </p>
+              <p>
+                If you were a developer in 2006, you probably remember every
+                company wanted to be able to say their product was built using
+                SOA; this is beginning to happen with microservices today.
+              </p>
+              <p>
+                I suspect what this graph shows is for about three quarters of
+                companies who tried SOA, the additional effort didn't provide
+                sufficient benefit, and they mostly abandoned it.
+              </p>
+              <p>
+                Since microsevices are a form of SOA let's assume the same is
+                true and about 25% of companies trying microservices will
+                benefit.
+              </p>
+              <p>
+                This presentation will help you to identify if your project is
+                likely to benefit, and to put you on the right path to achieving
+                those benefits.
               </p>
             </aside>
           </section>
@@ -136,6 +183,14 @@
             <li>Large risky releases</li>
             <li>Long on-boarding time for developers</li>
           </ul>
+
+          <aside class="notes">
+            <p>
+              Lets start by identifying some of the issues with large monolithic
+              applications.
+            </p>
+          </aside>
+
         </section>
 
         <section class="benefits">
@@ -167,10 +222,26 @@
 
           <section data-background-color="#01939A">
             <h1>Cloud friendly</h1>
+
+            <aside class="notes">
+              <ul>
+                <li>Fine grained salability</li>
+                <li>Use cheaper VMs with lower resource requirements</li>
+                <li>Lock free</li>
+              </ul>
+            </aside>
           </section>
 
           <section data-background-color="#01939A">
             <h1>Implementation diversity</h1>
+
+            <aside class="notes">
+              <ul>
+                <li>Use the right tool for each job</li>
+                <li>Keep pace with advancements</li>
+                <li>Greater recruitment pool</li>
+              </ul>
+            </aside>
           </section>
 
           <section data-background-color="#01939A">
@@ -180,32 +251,62 @@
             </h1>
 
             <aside class="notes">
-              New services are always an oppotunity to update to the latest advances in technology.
+              <p>
+                New services are always an opportunity to update to the latest
+                advances in technology.
+              </p>
+              <p>Refine your implementation of the design patterns</p>
+              <p>Iterative improvement</p>
             </aside>
           </section>
 
           <section data-background-color="#01939A">
-            <h1>Manageble size</h1>
+            <h1>Manageable size</h1>
 
             <aside class="notes">
-              Less to:
-              <ul>
-                <li>learn</li>
-                <li>update</li>
-                <li>rewrite</li>
-                <li>build</li>
-                <li>deploy</li>
-                <li>run</li>
-              </ul>
+              <p>Each microservice is a manageable size.</p>
+              <p>
+                Less to:
+                <ul>
+                  <li>learn</li>
+                  <li>update</li>
+                  <li>rewrite</li>
+                  <li>build</li>
+                  <li>deploy</li>
+                  <li>run</li>
+                </ul>
+              </p>
+              <p>They're never be too big to refactor.</p>
             </aside>
           </section>
 
           <section data-background-color="#01939A">
             <h1>Focus on services that change</h1>
+
+            <aside class="notes">
+              <p>
+                Even if only 10% of the microservices are using the latest
+                technology and best practice, if these are the 10% that are
+                under active development, you'll still have a happy development
+                team.
+              </p>
+              <p>
+                If a service is working and not under development there is no
+                need to spend money updating it.
+              </p>
+              <p>Still need to apply security patches/updates.</p>
+            </aside>
           </section>
 
           <section data-background-color="#01939A">
             <h1>Frequent, small, low risk releases</h1>
+
+            <aside class="notes">
+              <p>
+                You can do canary releases during office hours rather than 2 am
+                on a Sunday morning.
+              </p>
+            </aside>
           </section>
         </section>
 
@@ -222,17 +323,42 @@
             <h1>Small = less effort</h1>
 
             <aside class="notes">
-              <ul>
-                <li>Local method calls become remote procedure calls</li>
-                <li>Acid database transaction become distributed transactions with eventual consistency</li>
-                <li>Code and data has to be duplicated between services</li>
-                <li>You spend more time releasing and versioning artifacts</li>
-              </ul>
+              <p>
+                This is not the case because:
+                <ul>
+                  <li>Local method calls become remote procedure calls</li>
+                  <li>ACID database transaction become distributed transactions
+                      with eventual consistency</li>
+                  <li>Code and data has to be duplicated between services</li>
+                  <li>You spend more time releasing and versioning artifacts</li>
+                </ul>
+              </p>
             </aside>
           </section>
 
           <section>
             <h1>It's another evolutionary change</h1>
+
+            <aside class="notes">
+              <p>It's not a simple drop in implementation change like choosing
+                 between Java EE and the Spring Framework.</p>
+              <p>
+                It's going to affect everything you do:
+                <ul>
+                  <li>Some staff roles will be created</li>
+                  <li>Some staff roles will be eliminated</li>
+                  <li>Responsibilities of remaining staff will change</li>
+                  <li>Your organizational structure will need to change</li>
+                  <li>It will change the way you run projects</li>
+                  <li>Your APIs will be different</li>
+                  <li>You'll be using different design patterns</li>
+                  <li>You'll be using different databases</li>
+                  <li>It'll change the way you test software</li>
+                  <li>It'll change the way you support software</li>
+                  <li>It'll change the way you release software</li>
+                </ul>
+              </p>
+            </aside>
           </section>
         </section>
 
@@ -263,17 +389,19 @@
             <h2>Distributed transactions</h2>
 
             <ul class="increased-spacing">
-              <li>Local transactions = easy</li>
+              <li>Much harder to implement than local transactions</li>
               <li>Requires more code</li>
               <li>Increased latency</li>
               <li>
                 Approaches:
                 <ul>
                   <li>Compensating transaction / Saga pattern</li>
-                  <li>2 phase commit</li>
+                  <li>2 phase commit (requires synchronous implementation)</li>
                 </ul>
               </li>
               <li>Still may not be able to fully commit/rollback</li>
+              <li>Easy to make happy path work but fail to handle errors
+                  correctly</li>
             </ul>
           </section>
 
@@ -298,13 +426,15 @@
             <h2>Eventual consistency</h2>
 
             <ul class="increased-spacing">
-              <li>ACID = easy</li>
+              <li>Much harder to work with than ACID behaviour</li>
               <li>Not immediately readable</li>
               <li>Not repeatedly readable</li>
               <li>
                 Advice:
                 <ul>
-                  <li>Pass the data rather than querying it</li>
+                  <li>Use event sourcing and CQRS</li>
+                  <li>Pass your domain objects between services rather than
+                      re-querying them</li>
                   <li>Avoid UI/APIs requiring immediate consistency</li>
                   <li>Implement auto-retry where necessary</li>
                 </ul>
@@ -315,24 +445,110 @@
 
         <section class="mixed-dark">
           <section>
-            <h2>API Considerations</h2>
+            <h2>API considerations</h2>
 
             <ul class="increased-spacing">
               <li>Idempotentcy</li>
               <li>UUIDs</li>
-              <li>Reactive Systems</li>
+              <li>Event sourcing</li>
+              <li>Reactive systems</li>
               <li>Distributed transactions</li>
               <li>Eventual consistency</li>
+            </ul>
+
+            <aside class="notes">
+              <ul>
+                <li>Idempotentcy: you need to make it safe to retry API calls
+                    because there are many more potential points of failure.</li>
+                <li>UUIDs: help you to implement idempotentcy; NoSQL databases
+                    generally don't provide sequential ID generators.</li>
+                <li>Event Sourcing: helps with eventually consistent databases</li>
+                <li>Reactive Systems: helps with performance and reliability</li>
+                <li>Distributed transactions: an unavoidable side effect of
+                    using microservices</li>
+                <li>Eventual consistency: used to improve scalability</li>
+              </ul>
+            </aside>
+
+          </section>
+
+          <section>
+            <h2>UUIDs</h2>
+
+            <ul class="increased-spacing">
+              <li>Can't definitively check that a UUID hasn't been used
+                  (eventual consistency)</li>
+              <li>Accidental collisions are astronomically unlikely</li>
+              <li>
+                Protect against a client maliciously overwriting records
+                <ul>
+                  <li>e.g. Use hierarchy of IDs so client can only modify their
+                      own records</li>
+                  <li>
+                    e.g. UUIDs have to be requested from the server
+                    <ul>
+                      <li>Use secure hash to protect from client modification
+                          (slow)</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </section>
 
           <section>
-            <h2>Reactive Systems</h2>
+            <h2>Event sourcing</h2>
+
+            <ul class="increased-spacing">
+              <li>No "SELECT FOR UPDATE" with an eventually consistent database</li>
+              <li>Risk of overwriting concurrent changes</li>
+              <li>Send &amp; store the events (changes) instead of whole entities</li>
+              <li>Update API has to be based on events (changes)</li>
+              <li>Reconstruct the state of the entity at query time</li>
+              <li>Query API for reconstructed entities (CQRS)</li>
+              <li>Complete history</li>
+              <li>Audit log</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Event sourcing (contd.)</h2>
+
+            <ul class="increased-spacing">
+              <li>
+                Problems:
+                <ul>
+                  <li>
+                    What order do you apply the changes?
+                    <ul>
+                      <li>Business rules e.g. based on a state model</li>
+                      <li>Timestamp</li>
+                    </ul>
+                  </li>
+                  <li>Handling schema changes</li>
+                  <li>The more events the slower it is to query</li>
+                  <li>More difficult to query entities by mutable properties</li>
+                </ul>
+              </li>
+              <li>
+                Advice:
+                <ul>
+                  <li>Only use it for mutable entities</li>
+                  <li>Use immutable entities where possible</li>
+                  <li>Give nested entities UUIDs (especially if contained in
+                      arrays)</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Reactive systems</h2>
 
             <ul class="increased-spacing">
               <li>Message driven</li>
               <li>
-                Asynchronous
+                Asynchronous API
                 <ul>
                   <li>Don't return success/failure status</li>
                   <li>Don't return data</li>
@@ -346,72 +562,19 @@
           </section>
 
           <section>
-            <h2>Reactive Systems (cont.)</h2>
+            <h2>Reactive systems (cont.)</h2>
 
-            <ul class="increased-spacing">
-              <li>
-                Advice:
-                <ul>
-                  <li>Communicate success/failure/data by message</li>
-                  <li>Client registers interest in messages</li>
-                  <li>Each client must be associated with a ClientUUID</li>
-                  <li>Each request must have a RequestUUID</li>
-                  <li>Consider simple RPC/REST for read only requests</li>
-                </ul>
-              </li>
-            </ul>
+            <h3>Non-reactive example</h3>
+
+            <img data-src="img/rpc.svg" class="flow-diagram">
           </section>
 
           <section>
-            <h2>Reactive Systems (cont.)</h2>
+            <h2>Reactive systems (cont.)</h2>
 
-            <p>An analog world example of a reactive system:</p>
+            <h3>Reactive example</h3>
 
-            <ol class="increased-spacing">
-              <li>Customer registers to receive bank statements by post</li>
-              <li>Customer sends cheque (UK) / check (USA) by post</li>
-              <li>Bank receives cheque</li>
-              <li>Bank deposits cheque</li>
-              <li>Bank sends monthly statement by post to customer</li>
-              <li>Customer receives monthly statement</li>
-              <li>Customer is able to verify cheque was deposited</li>
-            </ol>
-
-            <aside class="notes">
-              <ul>
-                <li>Resilience (mailbox vandalised, postman sick, bank teller sick)</li>
-                <li>Aggregation (mailbox, mail-van)</li>
-                <li>Backpressure (block up postbox if there's postal strike)</li>
-                <li>The process of how banks check funds to clear the cheque also uses eventual consistency</li>
-                <li>Contrast with depositing cash in branch</li>
-              </ul>
-            </aside>
-          </section>
-
-          <section>
-            <h2>Reactive Systems (cont.)</h2>
-
-            <p>A microservice example of a reactive system:</p>
-
-            <div class="hljs">
-              <ol>
-                <li><span class="hljs-variable">WebClient</span> <span class="hljs-symbol">&#10140;</span> <span class="hljs-variable">NotificationService</span>: WebSocket <span class="hljs-comment"># Listen for messages</span></li>
-                <li>
-                  <span class="hljs-variable">WebClient</span> <span class="hljs-symbol">&#10140;</span> <span class="hljs-variable">OrderWs</span>: REST <span class="hljs-comment"># Submit an order</span>
-                  <ol>
-                    <li><span class="hljs-variable">OrderWs</span> <span class="hljs-symbol">&#10140;</span> <span class="hljs-variable">CreateOrder</span>: queue</li>
-                    <li><span class="hljs-variable">OrderWs</span> <span class="hljs-symbol">returns</span> <span class="hljs-number">202</span> <span class="hljs-comment"># Accepted</span></li>
-                  </ol>
-                </li>
-                <li><span class="hljs-variable">OrderService</span> <span class="hljs-symbol">&#10140;</span> <span class="hljs-variable">CreateAddress</span>: queue</li>
-                <li><span class="hljs-variable">AddressService</span> <span class="hljs-symbol">&#10140;</span> <span class="hljs-variable">CreateOrder_CreateAddress_Success</span>: queue</li>
-                <li><span class="hljs-variable">OrderService</span> <span class="hljs-symbol">&#10140;</span> <span class="hljs-variable">ProcessPayment</span>: queue</li>
-                <li><span class="hljs-variable">PaymentService</span> <span class="hljs-symbol">&#10140;</span> <span class="hljs-variable">CreateOrder_ProcessPayment_Success</span>: queue</li>
-                <li><span class="hljs-variable">OrderService </span><span class="hljs-comment"># Dispatches the order</span></li>
-                <li><span class="hljs-variable">OrderService</span> <span class="hljs-symbol">&#10140;</span> <span class="hljs-variable">NotificationService</span> <span class="hljs-comment"># Success</span></li>
-                <li><span class="hljs-variable">NotificationService</span> <span class="hljs-symbol">&#10140;</span> <span class="hljs-variable">WebClient</span>: WebSocket <span class="hljs-comment"># Success</span></li>
-              </ol>
-            </div>
+            <img data-src="img/reactive-happy.svg" class="flow-diagram">
 
             <aside class="notes">
               <ul>
@@ -422,6 +585,31 @@
                 <li>Linear flow easy to rollback</li>
               </ul>
             </aside>
+
+          </section>
+
+          <section>
+            <h2>Reactive systems (cont.)</h2>
+
+            <h3>State transitions</h3>
+
+            <img data-src="img/reactive-state.svg" class="flow-diagram">
+          </section>
+
+          <section>
+            <h2>Reactive systems (cont.)</h2>
+
+            <h3>Failure handling</h3>
+
+            <img data-src="img/reactive-unhappy1.svg" class="flow-diagram">
+          </section>
+
+          <section>
+            <h2>Reactive systems (cont.)</h2>
+
+            <h3>Rollback</h3>
+
+            <img data-src="img/reactive-unhappy2.svg" class="flow-diagram">
           </section>
         </section>
 
@@ -430,29 +618,23 @@
             <h1>Infrastructure requirements</h1>
 
             <aside class="notes">
-              Obvious requirements:
-              <ul>
-                <li>Virtual servers to run microservices</li>
-                <li>Message Queue Service</li>
-                <li>Database Service</li>
-                <li>Build servers</li>
-                <li>Artifact repositories</li>
-              </ul>
+              <p>
+                More infrastructure requirements than a typical monolithic
+                application
+              </p>
             </aside>
           </section>
 
           <section data-background-color="#FF7600">
-            <h1>Cloud Platform</h1>
+            <h1>Cloud platform</h1>
 
             <aside class="notes">
               <ul>
-                <li>Impractical to user separate physical server</li>
                 <li>Too many servers to maintain manually</li>
                 <li>Dev, test, UAT, live</li>
                 <li>
                   Advice:
                   <ul>
-                    <li>Use Docker Compose for developers</li>
                     <li>Consider off the shelf services from your provider</li>
                     <li>If unsure choose Amazon (easy to find people with experience)</li>
                   </ul>
@@ -462,7 +644,18 @@
           </section>
 
           <section data-background-color="#FF7600">
-            <h1>Identity and Access Management (IAM) Service</h1>
+            <h1>Container manager</h1>
+
+            <aside class="notes">
+              <ul>
+                  <li>Too many containers instances to manage manually</li>
+                  <li>e.g. Docker Swarm / Kubernetes</li>
+              </ul>
+            </aside>
+          </section>
+
+          <section data-background-color="#FF7600">
+            <h1>Identity and access management (IAM) service</h1>
 
             <aside class="notes">
               <ul>
@@ -473,19 +666,19 @@
           </section>
 
           <section data-background-color="#FF7600">
-            <h1>API Gateway Service</h1>
+            <h1>API gateway service</h1>
 
             <aside class="notes">
               <ul>
                 <li>External entry point to your application</li>
-                <li>Denies access based on IAM Service</li>
+                <li>Permit/deny access based on IAM Service</li>
                 <li>Routes external APIs to internal microservices</li>
               </ul>
             </aside>
           </section>
 
           <section data-background-color="#FF7600">
-            <h1>Monitoring and Log Analytics Service</h1>
+            <h1>Monitoring and log analytics service</h1>
 
             <aside class="notes">
               <ul>
@@ -496,13 +689,13 @@
                 <li>Status dashboards</li>
                 <li>Performance analytics</li>
                 <li>Support queries</li>
-                <li>Too many separate log files to look at manually</li>
+                <li>Too many separate log files to look at individually</li>
               </ul>
             </aside>
           </section>
 
           <section data-background-color="#FF7600">
-            <h1>Configuration Service</h1>
+            <h1>Configuration service</h1>
 
             <aside class="notes">
               <ul>
@@ -514,7 +707,7 @@
           </section>
 
           <section data-background-color="#FF7600">
-            <h1>Notification Service</h1>
+            <h1>Notification service</h1>
 
             <aside class="notes">
               <ul>
@@ -526,13 +719,13 @@
           </section>
 
           <section data-background-color="#FF7600">
-            <h1>Deployment Service</h1>
+            <h1>Deployment service</h1>
 
             <aside class="notes">
               <ul>
                 <li>Setup complete DevOps pipeline</li>
                 <li>Synchronization/freezes for large releases not practical</li>
-                <li>Small releases too frequent to do manually</li>
+                <li>Small releases would be too frequent to do manually</li>
                 <li>Track release dependencies</li>
                 <li>Need excellent automated test coverage</li>
                 <li>Consider feature flags</li>
@@ -624,10 +817,10 @@
             <aside class="notes">
               <p>You'll likely end up with a mix of teams e.g.:</p>
               <ul>
-                <li>multiple Java teams because developers resources are easily avilable</li>
-                <li>a Scala team that work on the most performance crtitical services</li>
-                <li>a Node.JS team for less critical services where higher developer producivity will reduce cost</li>
-                <li>a golang team for lightly used services where lower resource requirements
+                <li>multiple Java teams because developers resources are easily available</li>
+                <li>a Scala team that work on the most performance critical services</li>
+                <li>a Node.JS team for services specific to web frontends</li>
+                <li>a Go team for simple services where lower resource requirements
                 can deliver significant savings on hosting costs</li>
               </ul>
             </aside>
@@ -647,7 +840,7 @@
             <aside class="notes">
               <ul>
                 <li>Ensures the APIs are consistent</li>
-                <li>Get the API right the first time</li>
+                <li>Important to get the API right the first time</li>
               </ul>
             </aside>
           </section>
@@ -660,17 +853,12 @@
             <h2>Run each team as if they are a separate company</h2>
 
             <ul class="increased-spacing">
-              <li>Make teams responsible for design, implementation and support</li>
+              <li>Make teams responsible for design, implementation and
+                  <b>support</b></li>
               <li>Track metrics for each team</li>
               <li>Bill internal users for using microservices</li>
               <li>Empower teams with the agility of a start up</li>
             </ul>
-
-            <aside class="notes">
-              <ul>
-                <li>This encourages a level of consistency between services written by the same team</li>
-              </ul>
-            </aside>
           </section>
         </section>
 
@@ -682,7 +870,8 @@
               <li>
                 Need to be able to change the APIs
                 <ul>
-                  <li>UUIDs, idempotent, distributed transactions, asynchronous</li>
+                  <li>UUIDs, idempotent, distributed transactions, asynchronous,
+                      and event sourcing</li>
                 </ul>
               </li>
               <li>
@@ -708,7 +897,7 @@
                   <li>
                     Keep refactoring of existing code/database to a minimum
                     <ul>
-                      <li>UUIDs don't fit in a 32 bit integer</li>
+                      <li>UUIDs are 128 bit so won't fit in a Java long</li>
                       <li>It's normal to duplicate data</li>
                     </ul>
                   </li>
@@ -731,7 +920,7 @@
               </ul>
             </li>
             <li>If you're maintaining a large application for a long time</li>
-            <li>If you need massive scalability</li>
+            <li>If you need fine grained scalability</li>
           </ul>
         </section>
 

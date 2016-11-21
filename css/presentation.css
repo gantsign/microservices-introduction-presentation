@@ -93,3 +93,6 @@
 .increased-spacing {
   margin: 20px 0;
   line-height: 1.3; }
+
+.reveal section img.flow-diagram {
+  background-color: white; }
