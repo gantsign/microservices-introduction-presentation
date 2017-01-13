@@ -35,7 +35,7 @@
 
           <div id="author">John Freeman</div>
           <div id="company">GantSign Ltd.</div>
-          <div id="date">21 Nov 2016</div>
+          <div id="date">7 Jan 2017</div>
 
           <div id="license">
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons Licence" style="border-width:0" data-src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />
@@ -46,13 +46,21 @@
           <aside class="notes">
             <p>Welcome</p>
             <p>
-              There are aany presentations covering the low level details of
+              There are many presentations covering the low level details of
               implementing microservices: e.g. Docker, Spring-Boot, Vert.x &amp;
-              Akka
+              Akka.
             </p>
             <p>
-              This presentation is going to step back, look at the benefits,
-              risks, patterns and organizational impacts of microservices
+              This presentation is going to step back to look at the challenges,
+              benefits and organizational impacts of adopting microservices.
+            </p>
+            <p>
+              This presentation is aimed at both technical and non-technical
+              team members.
+            </p>
+            <p>
+              I will be introducing some of the technical concepts involved,
+              but I'm not going to dive into the low level technical details.
             </p>
           </aside>
         </section>
@@ -63,8 +71,8 @@
 
             <aside class="notes">
               <p>
-                No standard definition but I'm going to put forward some common
-                features of a microservice.
+                No standard definition but there are some common features of
+                microservices.
               </p>
             </aside>
           </section>
@@ -96,8 +104,13 @@
 
             <aside class="notes">
               <p>
-                The implementation of each microservice is hidden from the others
-                behind a clearly defined external API.
+                The implementation of each microservice is hidden from the
+                others behind a clearly defined external API.
+              </p>
+              <p>
+                This means separate source repositories, separate builds,
+                separate databases, independent versioning and independent
+                releases.
               </p>
             </aside>
           </section>
@@ -126,10 +139,10 @@
                 Architecture.
               </p>
               <p>
-                Commonly this includes:
+                Distinguishing features typically include:
                 <ul>
-                  <li>Dropping the enterprise container</li>
                   <li>Hosting each service separately</li>
+                  <li>Dropping the enterprise container</li>
                   <li>Leveraging cloud infrastructure</li>
                 </ul>
               </p>
@@ -151,7 +164,8 @@
               <p>
                 If you were a developer in 2006, you probably remember every
                 company wanted to be able to say their product was built using
-                SOA; this is beginning to happen with microservices today.
+                SOA; the same thing is beginning to happen with microservices
+                today.
               </p>
               <p>
                 I suspect what this graph shows is for about three quarters of
@@ -203,8 +217,9 @@
 
             <aside class="notes">
               <p>
-                The most compelling reason to use microservices is you can achieve
-                much greater total productivity on a large project.
+                The most compelling reason to use microservices, is you can
+                achieve much greater total productivity on a large project,
+                by having parallel development teams.
               </p>
               <p>
                 Multiple small teams can work on separate microservices without
@@ -227,7 +242,8 @@
               <ul>
                 <li>Fine grained salability</li>
                 <li>Use cheaper VMs with lower resource requirements</li>
-                <li>Lock free</li>
+                <li>Use design patterns that avoid the need for locking between
+                    nodes</li>
               </ul>
             </aside>
           </section>
@@ -237,9 +253,9 @@
 
             <aside class="notes">
               <ul>
-                <li>Use the right tool for each job</li>
-                <li>Keep pace with advancements</li>
-                <li>Greater recruitment pool</li>
+                <li>Use the right tools for each job</li>
+                <li>Keep pace with technology and best practice</li>
+                <li>Access to a larger pool of developers to recruit from</li>
               </ul>
             </aside>
           </section>
@@ -251,12 +267,18 @@
             </h1>
 
             <aside class="notes">
-              <p>
-                New services are always an opportunity to update to the latest
-                advances in technology.
-              </p>
-              <p>Refine your implementation of the design patterns</p>
-              <p>Iterative improvement</p>
+              <ul>
+                <li>
+                  New services are always an opportunity to update to the latest
+                  advances in technology.
+                </li>
+                <li>
+                  Refine your implementation of the design patterns
+                </li>
+                <li>
+                  Iterative improvement
+                </li>
+              </ul>
             </aside>
           </section>
 
@@ -285,16 +307,16 @@
 
             <aside class="notes">
               <p>
-                Even if only 10% of the microservices are using the latest
+                Even if only 10% of your microservices are using the latest
                 technology and best practice, if these are the 10% that are
-                under active development, you'll still have a happy development
-                team.
+                under active development, you'll still have happy and well
+                motivated developers.
               </p>
               <p>
                 If a service is working and not under development there is no
-                need to spend money updating it.
+                need to spend money updating it (other than applying security
+                updates).
               </p>
-              <p>Still need to apply security patches/updates.</p>
             </aside>
           </section>
 
@@ -303,8 +325,8 @@
 
             <aside class="notes">
               <p>
-                You can do canary releases during office hours rather than 2 am
-                on a Sunday morning.
+                You can even do canary releases during office hours with zero
+                downtime.
               </p>
             </aside>
           </section>
@@ -316,301 +338,226 @@
           </section>
 
           <section>
-            <h1>Small = simpler</h1>
+            <h1>Small = simple</h1>
+          </section>
+
+          <section>
+            <h2>Small	&ne; simple</h2>
+
+            <div style="text-align: left">
+              <p>
+                Transactional properties
+                <ul>
+                  <li><span style="text-decoration: line-through">Atomicity</span> Distributed transactions</li>
+                  <li><span style="text-decoration: line-through">Consistency</span> Eventual consistency</li>
+                  <li><span style="text-decoration: line-through">Isolation</span> Event sourcing</li>
+                  <li>Durability</li>
+                </ul>
+              </p>
+              <p>
+                Programming model for calling between services
+                <ul>
+                  <li><span style="text-decoration: line-through">Local synchronous method calls and exception handling</span><br/>
+                      Reactive systems architecture</li>
+                </ul>
+              </p>
+            </div>
+
+            <aside class="notes">
+              <p>
+                If we look at the programming model we had with a large
+                monolithic application, we typically had a relational database
+                with ACID transactional properties and we called services using
+                local method calls and exception handling.
+              </p>
+              <p>
+                With microservices we replace this with distributed
+                transactions, eventual consistency, event sourcing and reactive
+                systems architecture.
+              </p>
+              <p>
+                The difference between these two programming models is similar
+                to the difference between paying with cash and paying by cheque.
+              </p>
+              <p>
+                Imagine a world where the only form of payment is cash.
+              </p>
+              <p>
+                I go to the supermarket, pick out the goods I want to buy, go to
+                the till, hand over the cash for the goods and leave with the
+                goods.
+              </p>
+              <p>
+                This transaction is effectively atomic because I only
+                leave with the goods if I have successfully paid for them; if
+                the transaction fails I keep my money and leave the goods in the
+                store.
+              </p>
+              <p>
+                This transaction is immediately consistent because as soon as I
+                pay the cashier for the goods I have less cash in my possession.
+              </p>
+              <p>
+                This transaction is isolated because I can't be in two places at
+                once paying two different cashiers.
+              </p>
+              <p>
+                This transaction is durable because the cash and goods are
+                physical items representing the state.
+              </p>
+              <p>
+                An in person transaction is also like a local method call in
+                that it is very reliable and any problems (e.g. offering the
+                wrong amount of cash) are easy to handle and resolve.
+              </p>
+              <p>
+                Now imagine a world where the only form of payment is by cheque
+                and you have to wait for the cheque to clear before you can take
+                your goods.
+              </p>
+              <p>
+                Obviously, I can't' go into the supermarket and wait 3-5 days at
+                the checkout for my check to clear, so the supermarket and I
+                have to change we way we interact.
+              </p>
+              <p>
+                So in this scenario, I go into the supermarket and place an
+                order for the goods I want, I pay by cheque and tell them when
+                to deliver the goods.
+              </p>
+              <p>
+                My transaction is no longer atomic, it is now distributed across
+                three separate services. On the day of my delivery, my cheque
+                needs to have cleared, the goods need to be in stock and there
+                needs to be space in the delivery truck for my order. Any of
+                these three things could fail; if they do fail the supermarket
+                may have to reallocate space on the truck, return goods to the
+                shelves, refund my payment and inform me of the failure.
+              </p>
+              <p>
+                The balance in my bank account is eventually consistent; I may
+                have different checks being paid in and paid out with no
+                certainty when they will clear.
+              </p>
+              <p>
+                I can check my balance and see how much money I have available
+                to spend at that moment, but I've no way of calculating the
+                amount of money I actually have; this is because I may not be
+                aware of all the uncleared cheques involving my account. This
+                may lead me to go overdrawn and may cause checks to bounce.
+              </p>
+              <p>
+                A bank account balance works on the principal of event sourcing;
+                instead of storing the current balance of your account it is
+                calculated based on the transactions, these transactions are the
+                events. This enables the notion of cleared and uncleared
+                transactions, which are used to ensure sufficient funds are
+                available for transactions to complete. This allows for multiple
+                transactions of occur simultaneously without requiring locking
+                across all the bank accounts involved in the transaction.
+              </p>
+              <p>
+                Shopping by placing an order could be implemented as a reactive
+                system; for example, if your local supermarket was unable to
+                fulfill an order, the order could be redirected to a nearby
+                supermarket instead.
+              </p>
+              <p>
+                So we have two quite different approaches, cash payments vs.
+                cheque payments. Hopefully it's clear that the cash approach is
+                the simpler of the two... so why do cheques exist? One reason is
+                cash doesn't scale; it's not convenient to store and move large
+                quantities of cash.
+              </p>
+              <p>
+                The same concepts that make using cheque payments harder to
+                implement, also make microservices harder to implement; however,
+                it's worth it for the same reason, microservice projects scale
+                better.
+              <p>
+              <p>
+                The take away from this, is microservices are more complex,
+                because we're replacing a programming model that was built out
+                of reliable and predictable steps, with a model where failures
+                and uncertainty are expected at each step, and where <b>you</b>
+                have to write code to handle that.
+              </p>
+            </aside>
           </section>
 
           <section>
             <h1>Small = less effort</h1>
+          </section>
 
-            <aside class="notes">
-              <p>
-                This is not the case because:
-                <ul>
-                  <li>Local method calls become remote procedure calls</li>
-                  <li>ACID database transaction become distributed transactions
-                      with eventual consistency</li>
-                  <li>Code and data has to be duplicated between services</li>
-                  <li>You spend more time releasing and versioning artifacts</li>
-                </ul>
-              </p>
-            </aside>
+          <section>
+            <h2>Small &ne; less effort</h2>
+
+            <ul>
+              <li>Distributed transactions</li>
+              <li>Eventual consistency</li>
+              <li>Event sourcing</li>
+              <li>Reactive systems architecture</li>
+              <li>More builds to setup &amp; maintain</li>
+              <li>Code and data duplication between services</li>
+              <li>More external APIs</li>
+              <li>More time versioning and releasing artifacts</li>
+              <li>More servers to manage and support</li>
+            </ul>
           </section>
 
           <section>
             <h1>It's another evolutionary change</h1>
-
-            <aside class="notes">
-              <p>It's not a simple drop in implementation change like choosing
-                 between Java EE and the Spring Framework.</p>
-              <p>
-                It's going to affect everything you do:
-                <ul>
-                  <li>Some staff roles will be created</li>
-                  <li>Some staff roles will be eliminated</li>
-                  <li>Responsibilities of remaining staff will change</li>
-                  <li>Your organizational structure will need to change</li>
-                  <li>It will change the way you run projects</li>
-                  <li>Your APIs will be different</li>
-                  <li>You'll be using different design patterns</li>
-                  <li>You'll be using different databases</li>
-                  <li>It'll change the way you test software</li>
-                  <li>It'll change the way you support software</li>
-                  <li>It'll change the way you release software</li>
-                </ul>
-              </p>
-            </aside>
-          </section>
-        </section>
-
-        <section class="bad-light">
-          <section data-background-color="#FFAD00">
-            <h1>What makes microservices hard to write</h1>
           </section>
 
-          <section data-background-color="#FFAD00">
-            <h1>Distributed transactions</h1>
+          <section>
+            <h2>It's NOT another<br/>evolutionary change</h2>
 
-            <aside class="notes">
-              Even if your service doesn't use distributed transactions
-              it will likely still be part of one.
-            </aside>
-          </section>
-
-          <section data-background-color="#FFAD00">
-            <h1>Eventual consistency</h1>
-
-            <aside class="notes">
-              Many cloud services, particularly NoSQL databases, require eventual consistency
-              to be able to work at scale.
-            </aside>
-          </section>
-
-          <section data-background-color="#FFAD00">
-            <h2>Distributed transactions</h2>
-
-            <ul class="increased-spacing">
-              <li>Much harder to implement than local transactions</li>
-              <li>Requires more code</li>
-              <li>Increased latency</li>
-              <li>
-                Approaches:
-                <ul>
-                  <li>Compensating transaction / Saga pattern</li>
-                  <li>2 phase commit (requires synchronous implementation)</li>
-                </ul>
-              </li>
-              <li>Still may not be able to fully commit/rollback</li>
-              <li>Easy to make happy path work but fail to handle errors
-                  correctly</li>
-            </ul>
-          </section>
-
-          <section data-background-color="#FFAD00">
-            <h2>Distributed transactions (cont.)</h2>
-
-            <ul>
-              <li>
-                Advice:
-                <ul>
-                  <li>Don't ignore it</li>
-                  <li>Document your service behavior</li>
-                  <li>Avoid when unnecessary</li>
-                  <li>Consider using transactional message queue</li>
-                  <li>Read SOA documentation on the topic</li>
-                </ul>
-              </li>
-            </ul>
-          </section>
-
-          <section data-background-color="#FFAD00">
-            <h2>Eventual consistency</h2>
-
-            <ul class="increased-spacing">
-              <li>Much harder to work with than ACID behaviour</li>
-              <li>Not immediately readable</li>
-              <li>Not repeatedly readable</li>
-              <li>
-                Advice:
-                <ul>
-                  <li>Use event sourcing and CQRS</li>
-                  <li>Pass your domain objects between services rather than
-                      re-querying them</li>
-                  <li>Avoid UI/APIs requiring immediate consistency</li>
-                  <li>Implement auto-retry where necessary</li>
-                </ul>
-              </li>
-            </ul>
+            <div style="text-align: left;">
+            <p>It's not like choosing between Java EE and Spring</p>
+            <p>
+              It's going to affect everything you do:
+              <ul>
+                <li>Your organizational structure will need to change</li>
+                <li>Various responsibilities will be devolved to microservice teams</li>
+                <li>It will change the way you run projects</li>
+                <li>Your APIs will be different</li>
+                <li>You'll be using different design patterns</li>
+                <li>It'll change the way you test, release &amp; support software</li>
+              </ul>
+            </p>
           </section>
         </section>
 
         <section class="mixed-dark">
-          <section>
-            <h2>API considerations</h2>
+          <h2>API considerations</h2>
 
-            <ul class="increased-spacing">
-              <li>Idempotentcy</li>
-              <li>UUIDs</li>
-              <li>Event sourcing</li>
-              <li>Reactive systems</li>
-              <li>Distributed transactions</li>
-              <li>Eventual consistency</li>
+          <ul class="increased-spacing">
+            <li>Idempotentcy</li>
+            <li>UUIDs</li>
+            <li>Event sourcing</li>
+            <li>Reactive systems architecture</li>
+            <li>Distributed transactions</li>
+            <li>Eventual consistency</li>
+          </ul>
+
+          <aside class="notes">
+            <p>
+              Let's consider how microservices will affect your APIs.
+            </p>
+            <ul>
+              <li>Idempotentcy: you need to make it safe to retry API calls
+                  because there are many more potential points of failure.</li>
+              <li>UUIDs: help you to implement idempotentcy; generally required
+                  by NoSQL databases.</li>
+              <li>Event sourcing: necessary when storing mutable data in
+                  eventually consistent databases.</li>
+              <li>Reactive systems architecture: helps with performance and
+                  reliability</li>
+              <li>Distributed transactions: a largely unavoidable side effect of
+                  using microservices</li>
+              <li>Eventual consistency: used to improve scalability</li>
             </ul>
-
-            <aside class="notes">
-              <ul>
-                <li>Idempotentcy: you need to make it safe to retry API calls
-                    because there are many more potential points of failure.</li>
-                <li>UUIDs: help you to implement idempotentcy; NoSQL databases
-                    generally don't provide sequential ID generators.</li>
-                <li>Event Sourcing: helps with eventually consistent databases</li>
-                <li>Reactive Systems: helps with performance and reliability</li>
-                <li>Distributed transactions: an unavoidable side effect of
-                    using microservices</li>
-                <li>Eventual consistency: used to improve scalability</li>
-              </ul>
-            </aside>
-
-          </section>
-
-          <section>
-            <h2>UUIDs</h2>
-
-            <ul class="increased-spacing">
-              <li>Can't definitively check that a UUID hasn't been used
-                  (eventual consistency)</li>
-              <li>Accidental collisions are astronomically unlikely</li>
-              <li>
-                Protect against a client maliciously overwriting records
-                <ul>
-                  <li>e.g. Use hierarchy of IDs so client can only modify their
-                      own records</li>
-                  <li>
-                    e.g. UUIDs have to be requested from the server
-                    <ul>
-                      <li>Use secure hash to protect from client modification
-                          (slow)</li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>Event sourcing</h2>
-
-            <ul class="increased-spacing">
-              <li>No "SELECT FOR UPDATE" with an eventually consistent database</li>
-              <li>Risk of overwriting concurrent changes</li>
-              <li>Send &amp; store the events (changes) instead of whole entities</li>
-              <li>Update API has to be based on events (changes)</li>
-              <li>Reconstruct the state of the entity at query time</li>
-              <li>Query API for reconstructed entities (CQRS)</li>
-              <li>Complete history</li>
-              <li>Audit log</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>Event sourcing (contd.)</h2>
-
-            <ul class="increased-spacing">
-              <li>
-                Problems:
-                <ul>
-                  <li>
-                    What order do you apply the changes?
-                    <ul>
-                      <li>Business rules e.g. based on a state model</li>
-                      <li>Timestamp</li>
-                    </ul>
-                  </li>
-                  <li>Handling schema changes</li>
-                  <li>The more events the slower it is to query</li>
-                  <li>More difficult to query entities by mutable properties</li>
-                </ul>
-              </li>
-              <li>
-                Advice:
-                <ul>
-                  <li>Only use it for mutable entities</li>
-                  <li>Use immutable entities where possible</li>
-                  <li>Give nested entities UUIDs (especially if contained in
-                      arrays)</li>
-                </ul>
-              </li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>Reactive systems</h2>
-
-            <ul class="increased-spacing">
-              <li>Message driven</li>
-              <li>
-                Asynchronous API
-                <ul>
-                  <li>Don't return success/failure status</li>
-                  <li>Don't return data</li>
-                  <li>Don't do RPC over message queue</li>
-                </ul>
-              </li>
-              <li>Good fit with distributed transactions</li>
-              <li>You need to implement backpressure</li>
-              <li>Often less convent/practical for the client</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2>Reactive systems (cont.)</h2>
-
-            <h3>Non-reactive example</h3>
-
-            <img data-src="img/rpc.svg" class="flow-diagram">
-          </section>
-
-          <section>
-            <h2>Reactive systems (cont.)</h2>
-
-            <h3>Reactive example</h3>
-
-            <img data-src="img/reactive-happy.svg" class="flow-diagram">
-
-            <aside class="notes">
-              <ul>
-                <li>No 1:1 RPC queues</li>
-                <li>Passes data to avoid eventual consistency issues</li>
-                <li>Validate and update the message data</li>
-                <li>Resilient to node failure</li>
-                <li>Linear flow easy to rollback</li>
-              </ul>
-            </aside>
-
-          </section>
-
-          <section>
-            <h2>Reactive systems (cont.)</h2>
-
-            <h3>State transitions</h3>
-
-            <img data-src="img/reactive-state.svg" class="flow-diagram">
-          </section>
-
-          <section>
-            <h2>Reactive systems (cont.)</h2>
-
-            <h3>Failure handling</h3>
-
-            <img data-src="img/reactive-unhappy1.svg" class="flow-diagram">
-          </section>
-
-          <section>
-            <h2>Reactive systems (cont.)</h2>
-
-            <h3>Rollback</h3>
-
-            <img data-src="img/reactive-unhappy2.svg" class="flow-diagram">
-          </section>
+          </aside>
         </section>
 
         <section>
@@ -629,17 +576,17 @@
             <h1>Cloud platform</h1>
 
             <aside class="notes">
-              <ul>
-                <li>Too many servers to maintain manually</li>
-                <li>Dev, test, UAT, live</li>
-                <li>
-                  Advice:
-                  <ul>
-                    <li>Consider off the shelf services from your provider</li>
-                    <li>If unsure choose Amazon (easy to find people with experience)</li>
-                  </ul>
-                </li>
-              </ul>
+              <p>
+                Microservices need a cloud platform.
+              </p>
+              <p>
+                There are simply too many servers to maintain manually.
+              </p>
+              <p>
+                Be careful when choosing a cloud provider, it's generally
+                better to go with one of the large established providers,
+                than end up being a guinea pig for a new provider.
+              </p>
             </aside>
           </section>
 
@@ -681,15 +628,20 @@
             <h1>Monitoring and log analytics service</h1>
 
             <aside class="notes">
+              <p>
+                With microservices there are simply too many separate log files
+                to inspect individually.
+              </p>
+
+              This will assist with:
               <ul>
-                <li>Auto scaling</li>
-                <li>Backpressure</li>
-                <li>Alerting</li>
-                <li>Resolve partial transactions</li>
-                <li>Status dashboards</li>
-                <li>Performance analytics</li>
-                <li>Support queries</li>
-                <li>Too many separate log files to look at individually</li>
+                <li>Implementing auto scaling</li>
+                <li>Implementing backpressure</li>
+                <li>Implementing alerting</li>
+                <li>Resolving partial transactions</li>
+                <li>Providing status dashboards</li>
+                <li>Providing performance analytics</li>
+                <li>Providing a support console</li>
               </ul>
             </aside>
           </section>
@@ -710,23 +662,35 @@
             <h1>Notification service</h1>
 
             <aside class="notes">
-              <ul>
-                <li>Email</li>
-                <li>Mobile push</li>
-                <li>HTTP Push</li>
-              </ul>
+              <p>
+                Reactive systems are asynchronous and message based; going back
+                to the shopping by cheque analogy, there is no synchronous
+                exchange of cache for goods, there is an order, which is the
+                message from the customer, and there are the goods that are
+                delivered at a later time, these goods are the message from the
+                supermarket.
+              </p>
+              <p>
+                So when microservices are implemented as a reactive system they
+                need the equivalent of a delivery truck, to deliver messages to
+                the clients those microservices; the notification service is
+                that delivery truck.
+              </p>
+              <p>
+                The notification service will typically deliver messages to the
+                clients using HTTP push, mobile push or email.
+              </p>
             </aside>
           </section>
 
           <section data-background-color="#FF7600">
-            <h1>Deployment service</h1>
+            <h1>Deployment pipeline</h1>
 
             <aside class="notes">
               <ul>
-                <li>Setup complete DevOps pipeline</li>
-                <li>Synchronization/freezes for large releases not practical</li>
+                <li>Synchronized releases &amp; release freezes are not practical</li>
                 <li>Small releases would be too frequent to do manually</li>
-                <li>Track release dependencies</li>
+                <li>Need a mechanism to ensure dependencies are satisfied before deployment</li>
                 <li>Need excellent automated test coverage</li>
                 <li>Consider feature flags</li>
               </ul>
@@ -740,20 +704,148 @@
           </section>
 
           <section>
-            <h2>The easiest way to sabotage a microservice project, is to undermine the ability of your teams to work in parallel.</h2>
+            <h2>Working concurrently</h2>
+
+            <p>
+              Where people/teams have to coordinate their work because it is
+              affecting others
+            </p>
 
             <aside class="notes">
               <ul>
-                <li>Teams should work in parallel rather than concurrently</li>
-                <li>Concurrently is where the teams have to coordinate their work because it is affecting the other teams</li>
-                <li>Parallel is where the work is separate and doesn't require coordination</li>
-                <li>Coordinating work between teams slows everyone down and causes havoc with planning</li>
+                <li>
+                  The overhead of concurrent development is relatively low
+                  within a small team.
+                </li>
+                <li>
+                  The overhead of coordinating work between teams is much
+                  higher; it slows down entire teams and causes havoc with
+                  planning.
+                </li>
               </ul>
+            </aside>
+
+          </section>
+
+          <section>
+            <h2>Working in parallel</h2>
+
+            <p>Where the work is separate and doesn't require coordination</p>
+
+            <aside class="notes">
+              <p>
+                With microservices you aim to work in parallel.
+              </p>
+              <p>
+                Where the work is separate and doesn't require coordination.
+              </p>
+              <p>
+                Microservice projects should be run in such a way, that
+                concurrent work only occurs within individual microservice
+                teams, work between teams and other parties should occur in
+                parallel.
+              </p>
+              <p>
+                You should resolve all dependencies on other teams and other
+                parties before assigning the microservice to a team for
+                implementation.
+              </p>
             </aside>
           </section>
 
           <section>
+            <h2>The easiest way to sabotage a microservice project, is to undermine the ability of your teams to work in parallel</h2>
+          </section>
+
+          <section>
             <h2>Do not share code between microservices</h2>
+
+            <div style="text-align: left">
+              <p>
+                Much higher concurrency cost than with a monolithic application:
+                <ul class="increased-spacing">
+                  <li>Changes are not atomic with multiple repositories</li>
+                  <li>Takes multiple teams to schedule and apply changes</li>
+                  <li>The more microservices that share the code the more to update</li>
+                  <li>Technical debt builds up on services that aren't kept up to date</li>
+                  <li>Can impact the release schedule across multiple teams</li>
+                  <li>May take a long time to get feedback and iterate improvements</li>
+                </ul>
+              </p>
+            </div>
+          </section>
+<!--
+          <section>
+            <h2>
+              Microservice teams must work in parallel to other teams and the
+              rest of your organization.
+            </h2>
+          </section>
+
+          <section>
+            <h2>
+              Microservice teams must avoid working concurrently with anyone
+              outside the team.
+            </h2>
+          </section>
+
+          <section>
+            <h2>How to minimize concurrency</h2>
+
+            <ul>
+              <li>Do not share code between microservices</li>
+              <li>Do not share databases between microservices</li>
+              <li>Ensure you have everything that is required from outside the
+                  team <b>before</b> you assign a team to develop a
+                  microservice</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Low impact of code sharing within monolithic applications</h2>
+
+            <ul>
+              <li>
+                Shared source repository
+                <ul>
+                  <li>Text search &amp; find usages</li>
+                  <li>IDE supported refactorings</li>
+                  <li>Refactorings are atomic</li>
+                </ul>
+              </li>
+              <li>
+                Shared build &amp; CI
+                <ul>
+                  <li>
+                    Have to apply changes when refactoring an API
+                    <ul>
+                      <li>Better awareness of all the usecases</li>
+                    </ul>
+                  </li>
+                  <li>
+                    Build/tests fail if you break another service
+                    <ul>
+                      <li>Block breaking code from getting merged</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Shared planning &amp; development cycle</li>
+              <li>Stability &amp; shared governance</li>
+            </ul>
+
+            <aside class="notes">
+              <p>
+                All of the above either make concurrent work more efficient or
+                reduces the chance your concurrent work will negatively impact
+                another person/team.
+              </p>
+            </aside>
+
+          </section>
+
+          <section>
+            <h2>High impact of code sharing between microservices</h2>
 
             <ul class="increased-spacing">
               <li>Changes are not atomic with multiple repositories</li>
@@ -764,7 +856,6 @@
               <li>May take a long time to get feedback and iterate improvements</li>
             </ul>
           </section>
-
           <section>
             <h2>Do not share code between microservices (cont.)</h2>
 
@@ -785,6 +876,7 @@
               </li>
             </ul>
           </section>
+-->
 
           <section>
             <h2>Do not mandate specific frameworks, libraries, languages and internal implementation patterns</h2>
@@ -796,10 +888,68 @@
 
           <section>
             <h2>Do not maintain a central design authority with approval over all design decisions</h2>
+
+            <aside class="notes">
+              <p>
+                Central design authorities are important on large monolithic
+                applications; it's worth spending the extra time to get a
+                decision right first time, when a large team may be stuck with a
+                decision for many years.
+              </p>
+              <p>
+                With microservices a single team should be responsible for a
+                microservice for it's entire lifetime; this includes design,
+                implementation, support and maintenance.
+              </p>
+              <p>
+                You don't want an external entity imposing days or weeks of
+                delays for decisions that are small in scope and easily changed.
+                Instead you want your microservice teams to feel ownership and
+                responsibility for their services, and to be able to use an
+                agile iterative approach to continually improve.
+              </p>
+            </aside>
           </section>
 
           <section>
             <h2>Do not run a microservice project like a large monolithic enterprise application project</h2>
+
+            <aside class="notes">
+              <p>
+                This is a lot easier to say than to do. Everybody's first
+                instinct is to stick with what we know was working before;
+                to twist your microservice project into a familiar shape rather
+                than adapting to its new shape.
+              </p>
+              <p>
+                You really have to reevaluate all your assumptions and
+                procedures.
+              </p>
+              <p>
+                Ask yourself the following questions:
+                <ul>
+                  <li>
+                    Can this responsibility be devolved to the microservice
+                    teams?
+                  </li>
+                  <li>
+                    Am I doing everything I can to minimize concurrency between
+                    microservice teams?
+                  </li>
+                  <li>
+                    What is the best option, given my goal is to achieve maximum
+                    total productivity even at the cost of individual
+                    productivity?
+                  </li>
+                  <li>
+                    Given many people on the project lack previous experience
+                    with microservices, and it's a rapidly evolving field, how
+                    can I encourage research, knowledge sharing and short
+                    iterative improvement cycles?
+                  </li>
+                </ul>
+              </p>
+            </aside>
           </section>
         </section>
 
@@ -819,7 +969,7 @@
               <ul>
                 <li>multiple Java teams because developers resources are easily available</li>
                 <li>a Scala team that work on the most performance critical services</li>
-                <li>a Node.JS team for services specific to web frontends</li>
+                <li>a Node.js team for services specific to web frontends</li>
                 <li>a Go team for simple services where lower resource requirements
                 can deliver significant savings on hosting costs</li>
               </ul>
@@ -838,15 +988,40 @@
             <h1>Have an API guild</h1>
 
             <aside class="notes">
-              <ul>
-                <li>Ensures the APIs are consistent</li>
-                <li>Important to get the API right the first time</li>
-              </ul>
+              <p>
+                You should have an API guild.
+              </p>
+              <p>
+                This improves API consistency between services.
+              </p>
+              <p>
+                It's important to get your external APIs correct first time; API
+                changes will not just mean rework for the team implementing
+                the service, but disruption and rework for other teams building
+                against the service as well.
+              </p>
             </aside>
           </section>
 
           <section data-background-color="#01939A">
             <h1>Strictly follow TDD/BDD</h1>
+
+            <aside class="notes">
+              <p>
+                You should strictly follow test driven development or behavior
+                driven development.
+              </p>
+              <p>
+                High test coverage with well written tests is essential for
+                microservice projects. You'll need both integration tests and
+                unit tests to ensure microservices work correctly together.
+              </p>
+              <p>
+                As well as preventing defects from being released, it's
+                important to catch defects before they disrupt other
+                microservice teams.
+              </p>
+            </aside>
           </section>
 
           <section data-background-color="#01939A">
@@ -862,51 +1037,15 @@
           </section>
         </section>
 
-        <section class="mixed-light">
-          <section data-background-color="#FF7600">
-            <h2>Replacing an existing application</h2>
+        <section class="bad-dark">
+          <h2>When not to use microservices</h2>
 
-            <ul class="increased-spacing">
-              <li>
-                Need to be able to change the APIs
-                <ul>
-                  <li>UUIDs, idempotent, distributed transactions, asynchronous,
-                      and event sourcing</li>
-                </ul>
-              </li>
-              <li>
-                Beware of:
-                <ul>
-                  <li>Distributed transactions</li>
-                  <li>Eventual consistency</li>
-                  <li>Increased latency</li>
-                  <li>Low test coverage</li>
-                </ul>
-              </li>
-            </ul>
-          </section>
-
-          <section data-background-color="#FF7600">
-            <h2>Replacing an existing application (cont.)</h2>
-
-            <ul class="increased-spacing">
-              <li>Relatively long term investment</li>
-              <li>
-                Advice:
-                <ul>
-                  <li>
-                    Keep refactoring of existing code/database to a minimum
-                    <ul>
-                      <li>UUIDs are 128 bit so won't fit in a Java long</li>
-                      <li>It's normal to duplicate data</li>
-                    </ul>
-                  </li>
-                  <li>Easier to migrate whole functional areas at a time</li>
-                  <li>Consider total rewrite rather than gradual migration</li>
-                </ul>
-              </li>
-            </ul>
-          </section>
+          <ul class="increased-spacing">
+            <li>If you're a small start up with tight resources</li>
+            <li>If the application is small and unlikely to grow</li>
+            <li>If you primarily need ACID behavior</li>
+            <li>If you have a lot of cross service transactions</li>
+          </ul>
         </section>
 
         <section data-background-color="#01939A">
@@ -921,17 +1060,6 @@
             </li>
             <li>If you're maintaining a large application for a long time</li>
             <li>If you need fine grained scalability</li>
-          </ul>
-        </section>
-
-        <section class="bad-dark">
-          <h2>When not to use microservices</h2>
-
-          <ul class="increased-spacing">
-            <li>If you're a small start up with tight resources</li>
-            <li>If the application is small and unlikely to grow</li>
-            <li>If you primarily need ACID behavior</li>
-            <li>If you have a lot of cross service transactions</li>
           </ul>
         </section>
 
