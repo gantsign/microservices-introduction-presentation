@@ -779,7 +779,31 @@
             <h2>Do not mandate specific frameworks, libraries, languages and internal implementation patterns</h2>
 
             <aside class="notes">
-              You can still impose requirement on services for logging and monitoring etc.
+              <p>
+                If you try to impose a one-sized fits all approach, you'll
+                loose the productivity benefits of being able to vary the
+                implementation approach, depending on the requirements.
+              </p>
+              <p>
+                If you try to impose consistent implementation choices across
+                your microservices, one of two things will happen:
+                <ol>
+                  <li>
+                    You'll be stuck with all of your early mistakes because
+                    no one is permitted to change anything.
+                  </li>
+                  <li>
+                    You'll be stuck with an exponentially growing cost of
+                    updating your old microservices, every time a change is
+                    made.
+                  </li>
+                </ol>
+              </p>
+              <p>
+                Given you should avoid transferring microservices between teams,
+                there is little benefit in consistent implementation choices
+                across teams anyway.
+              </p>
             </aside>
           </section>
 
